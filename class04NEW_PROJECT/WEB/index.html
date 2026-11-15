@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧪 Test Data Generator & Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E<text y=%2226%22 font-size=%2226%22>🧪</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Top Header Bar -->
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand-area">
+          <div class="brand-icon">🧪</div>
+          <div>
+            <h1 class="brand-title">
+              Test Data Generator & Store
+              <span class="badge-cli">CLI Web Port</span>
+            </h1>
+            <p class="brand-subtitle">
+              Pure Client-Side (HTML / CSS / JS) • No Server • No Database • Faithful to CLI Architecture
+            </p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <div class="view-mode-toggle">
+            <button id="mode-gui-btn" class="mode-btn active" title="Switch to Graphical User Interface">
+              <span>📊</span> Dashboard GUI
+            </button>
+            <button id="mode-term-btn" class="mode-btn" title="Switch to Interactive CLI Terminal">
+              <span>💻</span> CLI Terminal
+            </button>
+          </div>
+          <button id="reset-session-btn" class="btn btn-secondary btn-sm" title="Reset current session choices">
+            <span>🔄</span> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Session Status Bar (Faithful to CLI SessionState summary) -->
+      <div class="session-summary-bar">
+        <div class="summary-items">
+          <div class="summary-item">
+            <span class="summary-label">Record count:</span>
+            <span id="status-count-val" class="badge badge-muted">not set</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Selected fields:</span>
+            <span id="status-fields-val" class="badge badge-muted">none selected</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Batch status:</span>
+            <span id="status-records-val" class="badge badge-muted">No data generated</span>
+          </div>
+        </div>
+        <div>
+          <span id="status-ready-badge" class="badge badge-warning">[Setup Required]</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- GUI Layout View -->
+    <div id="gui-container" class="main-layout">
+      
+      <!-- Side Navigation (Faithful to CLI Options 0-5) -->
+      <aside class="sidebar-nav">
+        <div class="nav-category">Navigation</div>
+        <button class="nav-btn active" data-screen="screen-dashboard">
+          <div class="nav-btn-content">
+            <span class="nav-num">🏠</span>
+            <span>Overview & Dashboard</span>
+          </div>
+        </button>
+        <button class="nav-btn" data-screen="screen-1">
+          <div class="nav-btn-content">
+            <span class="nav-num">1</span>
+            <span>Set record count</span>
+          </div>
+        </button>
+        <button class="nav-btn" data-screen="screen-2">
+          <div class="nav-btn-content">
+            <span class="nav-num">2</span>
+            <span>Select fields</span>
+          </div>
+        </button>
+        <button class="nav-btn" data-screen="screen-3">
+          <div class="nav-btn-content">
+            <span class="nav-num">3</span>
+            <span>Generate & validate</span>
+          </div>
+        </button>
+        <button class="nav-btn" data-screen="screen-4">
+          <div class="nav-btn-content">
+            <span class="nav-num">4</span>
+            <span>Save to CSV</span>
+          </div>
+        </button>
+        <button class="nav-btn" data-screen="screen-5">
+          <div class="nav-btn-content">
+            <span class="nav-num">5</span>
+            <span>View existing files</span>
+          </div>
+        </button>
+      </aside>
+
+      <!-- Main Panels -->
+      <main class="content-area">
+        
+        <!-- Dashboard Screen -->
+        <section id="screen-dashboard" class="screen-panel">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">🧪 Welcome to Test Data Generator & Store</h2>
+                <p class="card-subtitle">
+                  High-fidelity web port of the Python interactive CLI tool. All operations execute strictly in-browser.
+                </p>
+              </div>
+            </div>
+
+            <div class="alert alert-info">
+              <span class="bold">Faithful Implementation:</span> Replicates 100% of the logic from <code>logic.py</code> and <code>storage.py</code>:
+              Valid Israeli ID numbers (Luhn algorithm), Israeli mobile phones (05X-XXXXXXX), unique names pool, RFC 4180 CSV export with UTF-8 BOM encoding for Microsoft Excel, and uniqueness guarantees.
+            </div>
+
+            <div class="fields-grid mt-md">
+              <div class="field-select-card" onclick="switchScreen('screen-1')">
+                <div class="brand-icon">🔢</div>
+                <div class="field-card-info">
+                  <div class="field-card-title">1. Set Record Count <span class="field-badge-num">1–100,000</span></div>
+                  <div class="field-card-desc">Define the size of your test dataset. Includes boundary validations.</div>
+                </div>
+              </div>
+
+              <div class="field-select-card" onclick="switchScreen('screen-2')">
+                <div class="brand-icon">🏷️</div>
+                <div class="field-card-info">
+                  <div class="field-card-title">2. Select Fields <span class="field-badge-num">1 to 4 fields</span></div>
+                  <div class="field-card-desc">Choose from Full Name, Email, Israeli Phone, and Israeli ID (Luhn).</div>
+                </div>
+              </div>
+
+              <div class="field-select-card" onclick="switchScreen('screen-3')">
+                <div class="brand-icon">⚡</div>
+                <div class="field-card-info">
+                  <div class="field-card-title">3. Generate & Validate <span class="field-badge-num">Uniqueness</span></div>
+                  <div class="field-card-desc">Execute generation and inspect the live Uniqueness Validation report.</div>
+                </div>
+              </div>
+
+              <div class="field-select-card" onclick="switchScreen('screen-4')">
+                <div class="brand-icon">💾</div>
+                <div class="field-card-info">
+                  <div class="field-card-title">4. Save to CSV <span class="field-badge-num">UTF-8 BOM</span></div>
+                  <div class="field-card-desc">Export data directly to disk with Append or Overwrite safety.</div>
+                </div>
+              </div>
+
+              <div class="field-select-card" onclick="switchScreen('screen-5')">
+                <div class="brand-icon">📁</div>
+                <div class="field-card-info">
+                  <div class="field-card-title">5. View Existing Files <span class="field-badge-num">output/</span></div>
+                  <div class="field-card-desc">Browse previously saved files, preview records, or import external CSVs.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-md">
+              <h3 class="card-title">Current Configuration State</h3>
+              <div class="mt-sm">
+                <div><strong>Record Count:</strong> <span id="dash-count-display">Not set</span></div>
+                <div><strong>Selected Fields:</strong> <span id="dash-fields-display">None selected</span></div>
+                <div><strong>Session Status:</strong> <span id="dash-ready-display" class="text-warning bold">Setup required</span></div>
+              </div>
+              <div class="mt-md">
+                <button class="btn btn-primary" onclick="switchScreen('screen-1')">Start Configuration →</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 1: Set Record Count -->
+        <section id="screen-1" class="screen-panel hidden">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">1. Set Record Count</h2>
+                <p class="card-subtitle" id="current-count-display">Current value: Not set</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="count-input">Enter number of records to generate (1 – 100,000):</label>
+              <input type="text" id="count-input" class="input-text" placeholder="e.g. 50" autocomplete="off" />
+              <div id="count-error" class="error-text"></div>
+              <span class="form-hint">ASCII digits only, strictly positive integer up to 100,000.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Quick Presets:</label>
+              <div class="preset-chips">
+                <button class="chip-btn count-preset-btn" data-value="10">10 records</button>
+                <button class="chip-btn count-preset-btn" data-value="50">50 records</button>
+                <button class="chip-btn count-preset-btn" data-value="100">100 records</button>
+                <button class="chip-btn count-preset-btn" data-value="500">500 records</button>
+                <button class="chip-btn count-preset-btn" data-value="1000">1,000 records</button>
+                <button class="chip-btn count-preset-btn" data-value="10000">10,000 records</button>
+                <button class="chip-btn count-preset-btn" data-value="100000">100,000 records</button>
+              </div>
+            </div>
+
+            <div class="mt-lg">
+              <button id="save-count-btn" class="btn btn-primary">Save Record Count & Continue →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 2: Select Fields -->
+        <section id="screen-2" class="screen-panel hidden">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">2. Select Fields to Generate</h2>
+                <p class="card-subtitle">Choose one or more fields. Order and uniqueness are preserved.</p>
+              </div>
+              <div class="flex-between gap-sm">
+                <button id="fields-all-btn" class="btn btn-secondary btn-sm">Select All (all)</button>
+                <button id="fields-clear-btn" class="btn btn-secondary btn-sm">Clear</button>
+              </div>
+            </div>
+
+            <div class="fields-grid">
+              <label class="field-select-card">
+                <input type="checkbox" class="field-checkbox" data-number="1" value="full_name" />
+                <div class="field-card-info">
+                  <div class="field-card-title">
+                    <span class="field-badge-num">1</span> Full Name (<code>full_name</code>)
+                  </div>
+                  <div class="field-card-desc">Random Israeli first and last names (93 x 95 pool) with collision protection.</div>
+                </div>
+              </label>
+
+              <label class="field-select-card">
+                <input type="checkbox" class="field-checkbox" data-number="2" value="email" />
+                <div class="field-card-info">
+                  <div class="field-card-title">
+                    <span class="field-badge-num">2</span> Email (<code>email</code>)
+                  </div>
+                  <div class="field-card-desc">Derived from full name (if selected) or alphanumeric local part + standard domains.</div>
+                </div>
+              </label>
+
+              <label class="field-select-card">
+                <input type="checkbox" class="field-checkbox" data-number="3" value="phone" />
+                <div class="field-card-info">
+                  <div class="field-card-title">
+                    <span class="field-badge-num">3</span> Phone (<code>phone</code>)
+                  </div>
+                  <div class="field-card-desc">Israeli mobile phone number format: <code>05X-XXXXXXX</code>.</div>
+                </div>
+              </label>
+
+              <label class="field-select-card">
+                <input type="checkbox" class="field-checkbox" data-number="4" value="id_number" />
+                <div class="field-card-info">
+                  <div class="field-card-title">
+                    <span class="field-badge-num">4</span> ID Number (<code>id_number</code>)
+                  </div>
+                  <div class="field-card-desc">Valid 9-digit Israeli Teudat Zehut computed with the official Luhn check digit algorithm.</div>
+                </div>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="fields-cli-input">CLI Input Option (numbers separated by commas or spaces, e.g. <code>1,2,4</code> or <code>all</code>):</label>
+              <input type="text" id="fields-cli-input" class="input-text" placeholder="e.g. 1,2,3,4 or all" autocomplete="off" />
+              <div id="fields-error" class="error-text"></div>
+            </div>
+
+            <div class="mt-lg">
+              <button id="save-fields-btn" class="btn btn-primary">Save Fields & Continue →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 3: Generate & Validate Uniqueness -->
+        <section id="screen-3" class="screen-panel hidden">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">3. Generate Data & Validate Uniqueness</h2>
+                <p class="card-subtitle">Produces synthetic records with 100% collision prevention within the batch.</p>
+              </div>
+            </div>
+
+            <div id="generate-ready-alert"></div>
+            <div id="gen-config-summary"></div>
+
+            <div class="mt-md">
+              <button id="start-generate-btn" class="btn btn-success">
+                <span>⚡</span> Generate Data & Run Validation
+              </button>
+            </div>
+
+            <!-- Loading Spinner / Progress -->
+            <div id="generate-progress-box" class="card mt-md hidden text-center">
+              <p class="cyan bold">⏳ Generating records and calculating uniqueness... please wait.</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="generation-results-box" class="hidden mt-lg">
+              <div class="card-header">
+                <h3 class="card-title">Uniqueness Validation Report</h3>
+                <span class="dim">Generation time: <strong id="gen-time-stat" class="text-cyan">0.00s</strong></span>
+              </div>
+
+              <!-- Uniqueness Report Cards -->
+              <div id="uniqueness-report-container" class="uniqueness-report-grid"></div>
+
+              <!-- Terminal Style Preview (First 5 records) -->
+              <div class="card mt-md" style="background: #0d1117;">
+                <div id="cli-preview-text" class="mono" style="font-size: 0.85rem; line-height: 1.6; color: #c9d1d9;"></div>
+              </div>
+
+              <!-- Interactive Data Grid -->
+              <div class="card mt-md">
+                <div class="card-header">
+                  <h4 class="card-title">All Generated Records Preview</h4>
+                  <button id="proceed-to-save-btn" class="btn btn-primary btn-sm">
+                    Proceed to Save CSV (Option 4) →
+                  </button>
+                </div>
+                <div class="table-container">
+                  <table class="data-table">
+                    <thead id="preview-table-head"></thead>
+                    <tbody id="preview-table-body"></tbody>
+                  </table>
+                </div>
+                <div class="pagination-bar">
+                  <span id="preview-pagination-info"></span>
+                  <div class="flex-between gap-sm">
+                    <button id="preview-prev-btn" class="btn btn-secondary btn-sm" disabled>Previous</button>
+                    <button id="preview-next-btn" class="btn btn-secondary btn-sm" disabled>Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 4: Save Data to CSV -->
+        <section id="screen-4" class="screen-panel hidden">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">4. Save Data to CSV</h2>
+                <p class="card-subtitle">Exports generated records with UTF-8 BOM encoding for complete Excel and Hebrew compatibility.</p>
+              </div>
+            </div>
+
+            <div id="save-ready-info"></div>
+
+            <div class="form-group">
+              <label class="form-label" for="save-filename-input">Output filename (default: <code>test_data.csv</code>):</label>
+              <input type="text" id="save-filename-input" class="input-text" value="test_data.csv" placeholder="test_data.csv" />
+              <span class="form-hint">Filename will automatically include <code>.csv</code> extension.</span>
+            </div>
+
+            <div class="flex-between gap-md mt-md">
+              <button id="execute-save-btn" class="btn btn-primary">
+                <span>💾</span> Save to Virtual Directory & Download CSV
+              </button>
+              <button id="download-csv-btn" class="btn btn-secondary">
+                <span>📥</span> Download File Directly
+              </button>
+            </div>
+
+            <div id="save-result-box" class="mt-md hidden"></div>
+          </div>
+        </section>
+
+        <!-- Screen 5: View Existing CSV Files -->
+        <section id="screen-5" class="screen-panel hidden">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">5. View Existing Files</h2>
+                <p class="card-subtitle">Virtual Output Directory (<code>output/</code>) stored in browser local storage.</p>
+              </div>
+              <div class="flex-between gap-sm">
+                <input type="file" id="import-csv-file-input" accept=".csv" class="hidden" />
+                <button id="import-csv-btn" class="btn btn-secondary btn-sm">
+                  <span>📤</span> Import External CSV File
+                </button>
+              </div>
+            </div>
+
+            <div id="no-files-notice" class="alert alert-info hidden">
+              No CSV files found in virtual output directory. Generate and save data (Options 3 & 4) to populate this list.
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px">#</th>
+                    <th>Filename</th>
+                    <th>Records</th>
+                    <th>File Size</th>
+                    <th>Date Modified</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="existing-files-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- CLI Terminal View (Faithful Interactive Shell) -->
+    <div id="term-container" class="hidden">
+      <div id="terminal-view-wrapper"></div>
+    </div>
+
+  </div>
+
+  <!-- Modals -->
+
+  <!-- Confirm Generation Modal -->
+  <div id="generate-confirm-modal" class="modal-backdrop hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirm Data Generation</h3>
+      </div>
+      <div>
+        <p>Proceed with data generation using the current settings?</p>
+        <ul style="margin: 0.75rem 0 0.75rem 1.5rem; line-height: 1.8;">
+          <li>Record count: <strong id="modal-count-val" class="text-cyan"></strong></li>
+          <li>Fields: <strong id="modal-fields-val" class="text-cyan"></strong></li>
+        </ul>
+      </div>
+      <div class="modal-actions">
+        <button id="modal-confirm-no" class="btn btn-secondary">Cancel (no)</button>
+        <button id="modal-confirm-yes" class="btn btn-success">Proceed (yes)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Mode Prompt Modal (Append vs Overwrite) -->
+  <div id="save-mode-modal" class="modal-backdrop hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-warning">⚠ File Already Exists</h3>
+      </div>
+      <div>
+        <p>A file named <code id="modal-existing-filename"></code> already exists in virtual storage.</p>
+        <p class="mt-sm">Would you like to append new records to the existing file or overwrite it?</p>
+        <p class="form-hint mt-sm">
+          <strong>Safe Schema Alignment:</strong> Appending will automatically align column positions so values stay in their proper fields.
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button id="modal-save-cancel" class="btn btn-secondary">Cancel</button>
+        <button id="modal-save-overwrite" class="btn btn-danger">Overwrite File (no)</button>
+        <button id="modal-save-append" class="btn btn-primary">Append Records (yes)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- File Preview Modal (Screen 5 File Viewer) -->
+  <div id="file-preview-modal" class="modal-backdrop hidden">
+    <div class="modal-content" style="max-width: 900px;">
+      <div class="modal-header">
+        <h3 class="modal-title">File Preview: <code id="modal-filename-title" class="text-cyan"></code></h3>
+        <button id="modal-file-close" class="btn btn-secondary btn-sm">✕ Close</button>
+      </div>
+      <div id="modal-file-stats" class="dim" style="font-size: 0.85rem;"></div>
+      <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+        <table class="data-table">
+          <thead id="modal-file-thead"></thead>
+          <tbody id="modal-file-tbody"></tbody>
+        </table>
+      </div>
+      <div id="modal-file-truncation" class="dim" style="font-size: 0.8rem;"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/logic.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/cli_simulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,119 @@
+﻿
+[1m[36m════════════════════════════════════════════════════════════[0m
+[1m[36m  Test Data Generator — Invalid Input Test Runner[0m
+[1m[36m════════════════════════════════════════════════════════════[0m
+
+[1m[36m────────────────────────────────────────────────────────────[0m
+[1m[36m  Suite 1 · validate_count — Invalid Inputs[0m
+[1m[36m────────────────────────────────────────────────────────────[0m
+  [32m✔ PASS[0m  [2mempty string[0m
+  [32m✔ PASS[0m  [2mblank spaces[0m
+  [32m✔ PASS[0m  [2mzero[0m
+  [32m✔ PASS[0m  [2mnegative integer[0m
+  [32m✔ PASS[0m  [2mnegative string[0m
+  [32m✔ PASS[0m  [2mfloat[0m
+  [32m✔ PASS[0m  [2mfloat with comma[0m
+  [32m✔ PASS[0m  [2mletters only[0m
+  [32m✔ PASS[0m  [2mmixed alpha-num[0m
+  [32m✔ PASS[0m  [2mspecial chars[0m
+  [32m✔ PASS[0m  [2mtab character[0m
+  [32m✔ PASS[0m  [2mnewline character[0m
+  [32m✔ PASS[0m  [2mvery large number[0m
+  [32m✔ PASS[0m  [2mone above max[0m
+  [32m✔ PASS[0m  [2mSQL injection attempt[0m
+  [32m✔ PASS[0m  [2municode digit lookalike[0m
+  [32m✔ PASS[0m  [2mhex string[0m
+  [32m✔ PASS[0m  [2mscientific notation[0m
+  [32m✔ PASS[0m  [2mwhitespace+number+ws[0m
+  [32m✔ PASS[0m  [2mcomma-separated[0m
+  [32m✔ PASS[0m  [2m[valid] minimum valid: 1[0m
+  [32m✔ PASS[0m  [2m[valid] leading zeros strip[0m
+  [32m✔ PASS[0m  [2m[valid] max valid: 100000[0m
+  [32m✔ PASS[0m  [2m[valid] with surrounding spaces[0m
+  → [32m(24 pass)[0m
+
+[1m[36m────────────────────────────────────────────────────────────[0m
+[1m[36m  Suite 2 · validate_field_choices — Invalid Inputs[0m
+[1m[36m────────────────────────────────────────────────────────────[0m
+  [32m✔ PASS[0m  [2mempty string[0m
+  [32m✔ PASS[0m  [2mblank spaces[0m
+  [32m✔ PASS[0m  [2mout-of-range: 0[0m
+  [32m✔ PASS[0m  [2mout-of-range: 5[0m
+  [32m✔ PASS[0m  [2mout-of-range: 9[0m
+  [32m✔ PASS[0m  [2mout-of-range: -1[0m
+  [32m✔ PASS[0m  [2mletters[0m
+  [32m✔ PASS[0m  [2mword[0m
+  [32m✔ PASS[0m  [2mmixed valid+invalid[0m
+  [32m✔ PASS[0m  [2mfloat field number[0m
+  [32m✔ PASS[0m  [2mcomma only[0m
+  [32m✔ PASS[0m  [2mmultiple commas[0m
+  [32m✔ PASS[0m  [2mspaces only[0m
+  [32m✔ PASS[0m  [2mSQL injection[0m
+  [32m✔ PASS[0m  [2municode[0m
+  [32m✔ PASS[0m  [2m[valid] single field 1[0m
+  [32m✔ PASS[0m  [2m[valid] single field 1[0m
+  [32m✔ PASS[0m  [2m[valid] single field 4[0m
+  [32m✔ PASS[0m  [2m[valid] single field 4[0m
+  [32m✔ PASS[0m  [2m[valid] comma separated 1,2[0m
+  [32m✔ PASS[0m  [2m[valid] comma separated 1,2[0m
+  [32m✔ PASS[0m  [2m[valid] space separated 1 3[0m
+  [32m✔ PASS[0m  [2m[valid] space separated 1 3[0m
+  [32m✔ PASS[0m  [2m[valid] all four fields[0m
+  [32m✔ PASS[0m  [2m[valid] all four fields[0m
+  [32m✔ PASS[0m  [2m[valid] dedup 1,1,2[0m
+  [32m✔ PASS[0m  [2m[valid] dedup 1,1,2[0m
+  [32m✔ PASS[0m  [2m[valid] reversed order 4,3,2,1[0m
+  [32m✔ PASS[0m  [2m[valid] reversed order 4,3,2,1[0m
+  → [32m(29 pass)[0m
+
+[1m[36m────────────────────────────────────────────────────────────[0m
+[1m[36m  Suite 3 · TestDataGenerator — Edge Cases & Invalid Inputs[0m
+[1m[36m────────────────────────────────────────────────────────────[0m
+  [32m✔ PASS[0m  [2mgenerate(0) raises ValueError[0m
+  [32m✔ PASS[0m  [2mgenerate(-5) raises ValueError[0m
+  [32m✔ PASS[0m  [2mgenerate with empty fields list produces records[0m
+  [32m✔ PASS[0m  [2m20 full_name records are all unique[0m
+  [32m✔ PASS[0m  [2m50 email records are all unique[0m
+  [32m✔ PASS[0m  [2m100 phone records are all unique[0m
+  [32m✔ PASS[0m  [2m200 ID numbers: unique + valid Luhn check digit[0m
+  [32m✔ PASS[0m  [2mField isolation: only requested fields are populated[0m
+  [32m✔ PASS[0m  [2m30 generated emails have valid format (local@domain.tld)[0m
+  [32m✔ PASS[0m  [2m30 generated phones match Israeli format (05x-xxxxxxx)[0m
+  [32m✔ PASS[0m  [2m500 records (all fields): generated, unique, no crash[0m
+  → [32m(11 pass)[0m
+
+[1m[36m────────────────────────────────────────────────────────────[0m
+[1m[36m  Suite 4 · Storage Layer — Invalid Inputs & File Edge Cases[0m
+[1m[36m────────────────────────────────────────────────────────────[0m
+  [32m✔ PASS[0m  [2msave empty list raises ValueError[0m
+  [32m✔ PASS[0m  [2mload non-existent file raises FileNotFoundError[0m
+  [32m✔ PASS[0m  [2mload empty (0-byte) file raises ValueError[0m
+  [32m✔ PASS[0m  [2mload header-only CSV (no data rows) raises ValueError[0m
+  [32m✔ PASS[0m  [2mround-trip: save 1 record then load it back correctly[0m
+  [32m✔ PASS[0m  [2mappend mode: header written once, 2 data rows total[0m
+  [32m✔ PASS[0m  [2moverwrite mode: previous 5 rows replaced by 1 new row[0m
+  [32m✔ PASS[0m  [2mspecial chars (comma, quotes) in value survive CSV round-trip[0m
+  [32m✔ PASS[0m  [2mauto-creates nested output directory if it doesn't exist[0m
+  [32m✔ PASS[0m  [2moutput CSV starts with UTF-8 BOM (Excel-compatible)[0m
+  → [32m(10 pass)[0m
+
+[1m[36m────────────────────────────────────────────────────────────[0m
+[1m[36m  Suite 5 · Israeli ID / Luhn Check Digit[0m
+[1m[36m────────────────────────────────────────────────────────────[0m
+  [32m✔ PASS[0m  [2mknown valid ID 123456782 passes Luhn[0m
+  [32m✔ PASS[0m  [2mknown valid ID 000000000 passes Luhn[0m
+  [32m✔ PASS[0m  [2m500 generated IDs all pass their Luhn check digit[0m
+  [32m✔ PASS[0m  [2mID with wrong check digit correctly fails Luhn validation[0m
+  → [32m(4 pass)[0m
+
+════════════════════════════════════════════════════════════
+[1m  RESULTS[0m
+════════════════════════════════════════════════════════════
+  [32mPassed : 78[0m
+  Failed : 0
+  Errors : 0
+  Total  : 78
+────────────────────────────────────────────────────────────
+
+  [32m[1mALL TESTS PASSED ✔[0m
+
